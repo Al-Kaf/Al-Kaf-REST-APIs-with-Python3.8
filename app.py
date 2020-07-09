@@ -1,3 +1,5 @@
+import os  # to access to envirment varble for URL of database on heroku
+
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
@@ -9,7 +11,7 @@ from resources.store import Store, StoreList
 from db import db
 
 app = Flask(__name__)  #creat a Flask Object
-app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///data.db'
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get('DATABASE_URL','sqlite:///data.db') # DATABASE_URL verable creat in heroku system so, to get value from heroku system and sqlite:///data.db is the second way if DATABASE_URL Not work ((it will use for local rin)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.secret_key = 'jose'
 api = Api(app)         # Passing the Flask Opject to Api Of flask_restful, so we use falsk-restful the has Flask inside it.
