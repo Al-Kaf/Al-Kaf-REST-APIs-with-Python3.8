@@ -14,9 +14,6 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.secret_key = 'jose'
 api = Api(app)         # Passing the Flask Opject to Api Of flask_restful, so we use falsk-restful the has Flask inside it.
 
-@app.before_first_request
-def create_tables():
-    db.create_all() # to create tables it will know name and direction from this code 'sqlite:///data.db'
 
 jwt = JWT(app, authenticate, identity)  # it is creat route with (/auth) addrees.// it reseve username and password and return token
 
